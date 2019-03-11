@@ -3,7 +3,7 @@
 
 set -ex
 
-USERNAME=keynetworks
+USERNAME=${USERNAME-keynetworks}
 IMAGE=ztncui
 
 # bump version
