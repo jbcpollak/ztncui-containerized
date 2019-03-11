@@ -17,4 +17,11 @@ echo "HTTPS_PORT=$HTTPS_PORT" > /opt/key-networks/ztncui/.env
 echo "HTTP_PORT=$HTTP_PORT" >> /opt/key-networks/ztncui/.env
 [ ! -z $HTTP_ALL_INTERFACES ] && echo "HTTP_ALL_INTERFACES=$HTTP_ALL_INTERFACES" >> /opt/key-networks/ztncui/.env
 
-exec sudo -u ztncui /opt/key-networks/ztncui/ztncui
+if [ "$EUID" -eq "1000" ]
+then
+  SUDO="sudo -u ztncui"
+else
+  SUDO=
+fi
+
+exec $SUDO /opt/key-networks/ztncui/ztncui
